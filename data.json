@@ -1,9 +1,9 @@
 {
-  "generated_at":"2026-09-27 00:00 UTC",
-  "sources":["PTT","Dcard"],
-  "status":"demo",
-  "stocks":[
-    {"ticker":"ONDS","name":"Ondas Holdings","mentions":12,"sentiment":{"bullish":58,"neutral":25,"bearish":17},"summary":"Demo data：待自動化收集 PTT / Dcard 後替換。","posts":[{"source":"PTT","url":"https://www.ptt.cc/bbs/Stock/"}]},
-    {"ticker":"NVDA","name":"NVIDIA","mentions":9,"sentiment":{"bullish":67,"neutral":20,"bearish":13},"summary":"Demo data：待自動化收集 PTT / Dcard 後替換。","posts":[{"source":"PTT","url":"https://www.ptt.cc/bbs/Stock/"}]}
-  ]
+  "generated_at": "2026-09-27 13:41 UTC",
+  "sources": [
+    "PTT",
+    "Dcard"
+  ],
+  "status": "collector-only",
+  "stocks": []
 }
