@@ -1,17 +1,73 @@
 # Catlion 🦁
 
-US stock social-sentiment dashboard.
+US stock / ETF social-sentiment dashboard.
 
-## Current architecture
+## V7 architecture
 
 ```text
-Stocktwits → US trending stocks / ETFs → recent messages → Bullish/Bearish/untagged statistics → data.json → GitHub Pages
+                         Stocktwits
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+       Fixed Watchlist               Trending discovery
+              │                             │
+              └──────────────┬──────────────┘
+                             ↓
+                    recent symbol messages
+                             ↓
+                Bullish / Bearish / untagged
+                             ↓
+                         data.json
+                             ↓
+                      GitHub Pages
 ```
 
-PTT / Dcard are no longer used because Catlion is focused on US stocks / ETFs.
+### Fixed Watchlist
 
-The collector uses Stocktwits' public API endpoints for trending equities and recent symbol streams. Untagged messages are shown separately as「未標記」rather than being treated as confirmed bullish or bearish.
+The default list is:
 
-GitHub Actions can be started manually from **Actions → Catlion Daily Update → Run workflow** or run on the daily schedule.
+`ONDS, NVDA, AMD, TSLA, AAPL, MSFT, AMZN, META, GOOGL, AVGO, PLTR, SOFI, RKLB, SPY, QQQ`
 
-If Stocktwits access fails, the script preserves the previous `data.json` instead of replacing it with an empty dataset.
+The workflow passes this list through the `WATCHLIST` environment variable, so it can be edited without changing Python.
+
+### Trending discovery
+
+Catlion also collects up to 10 US trending symbols. If a trending symbol is not already in the Watchlist, it is added as a discovery candidate for that run.
+
+This means a ticker can be monitored for two reasons:
+
+- `watchlist` — permanently requested
+- `trending` — discovered from Stocktwits trending symbols
+
+## Sentiment
+
+Catlion reads the sentiment tag attached to each Stocktwits message.
+
+- `bullish` → Bullish
+- `bearish` → Bearish
+- anything else / no tag → 未標記
+
+Untaged messages are **not** treated as confirmed bullish or bearish.
+
+## GitHub Actions
+
+Run manually:
+
+**GitHub → Actions → Catlion Daily Update → Run workflow**
+
+The scheduled run is daily.
+
+The collector preserves the previous `data.json` if no symbol streams can be collected.
+
+## Important API note
+
+Stocktwits currently says its developer APIs are under review and new developer registrations are not being accepted. The current Catlion collector therefore relies on the public endpoints that were successfully working for this repository's Run #6; if Stocktwits changes access, the workflow may need another source or authenticated integration.
+
+## Files
+
+- `scraper.py` — Stocktwits collector
+- `data.json` — generated data
+- `app.js` — dashboard rendering/search
+- `index.html` — page structure
+- `style.css` — dashboard styling
+- `.github/workflows/daily.yml` — scheduled collector
