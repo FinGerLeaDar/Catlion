@@ -1,39 +1,6 @@
-let DATA=null;
-const $=s=>document.querySelector(s);
-async function load(){
-  try{
-    const r=await fetch("data.json?"+Date.now());
-    DATA=await r.json();
-    render(DATA);
-  }catch(e){
-    $("#stocks").innerHTML='<div class="card">暫時讀取不到 data.json。</div>';
-  }
-}
-function render(d){
-  $("#updated").textContent=`更新：${d.generated_at||"—"}`;
-  $("#sourceNote").textContent=`來源：${(d.sources||[]).join(" · ")}`;
-  const stocks=d.stocks||[];
-  const posts=stocks.reduce((n,s)=>n+(s.mentions||0),0);
-  $("#stats").innerHTML=`
-    <div class="stat">股票數量<b>${stocks.length}</b></div>
-    <div class="stat">討論量<b>${posts}</b></div>
-    <div class="stat">資料來源<b>${(d.sources||[]).length}</b></div>`;
-  draw(stocks);
-}
-function draw(stocks){
-  const q=($("#search").value||"").trim().toLowerCase();
-  const list=stocks.filter(s=>!q||s.ticker.toLowerCase().includes(q)||String(s.name||"").toLowerCase().includes(q));
-  $("#stocks").innerHTML=list.map(s=>{
-    const b=s.sentiment?.bullish||0,n=s.sentiment?.neutral||0,be=s.sentiment?.bearish||0;
-    return `<article class="card">
-      <div class="ticker">${esc(s.ticker)}</div><div class="name">${esc(s.name||"")}</div>
-      <div class="bar"><i style="width:${Math.max(0,Math.min(100,b))}%"></i></div>
-      <div class="numbers"><span>🟢 ${b}%</span><span>⚪ ${n}%</span><span>🔴 ${be}%</span></div>
-      <div class="summary">${esc(s.summary||"暫無摘要")}</div>
-      <div class="links">${(s.posts||[]).slice(0,3).map(p=>`<a target="_blank" rel="noopener" href="${esc(p.url)}">${esc(p.source)}</a>`).join("")}</div>
-    </article>`;
-  }).join("") || '<div class="card">找不到相關股票。</div>';
-}
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-$("#search").addEventListener("input",()=>DATA&&draw(DATA.stocks||[]));
-load();
+let DATA=null; const $=s=>document.querySelector(s);
+async function load(){try{const r=await fetch("data.json?"+Date.now());if(!r.ok)throw Error(r.status);DATA=await r.json();render(DATA)}catch(e){console.error(e);$("#stocks").innerHTML='<div class="card">暫時讀取不到 data.json。</div>'}}
+function render(d){const stocks=Array.isArray(d.stocks)?d.stocks:[];$("#updated").textContent="更新："+formatDate(d.generated_at);const s=d.sources?.Stocktwits;$("#sourceNote").textContent=s?`來源：Stocktwits · US stocks / ETFs · ${s.symbols||0} symbols · ${s.messages||0} messages`:"來源：Stocktwits";$("#stats").innerHTML=`<div class="stat">美股 / ETF<b>${stocks.length}</b></div><div class="stat">社群訊息<b>${d.total_items||0}</b></div><div class="stat">已標記情緒<b>${stocks.reduce((n,x)=>n+(x.tagged_count||0),0)}</b></div>`;draw(stocks)}
+function draw(stocks){const q=($("#search").value||"").trim().toLowerCase();const list=stocks.filter(s=>!q||s.ticker.toLowerCase().includes(q)||String(s.name||"").toLowerCase().includes(q));$("#stocks").innerHTML=list.map(s=>{const b=Number(s.bullish||0),n=Number(s.neutral||0),be=Number(s.bearish||0),score=Number(s.sentiment_score??50);return `<article class="card"><div class="card-head"><div><div class="ticker">${esc(s.ticker)}</div><div class="name">${esc(s.name||"")} · ${esc(s.exchange||"")}</div></div><div class="score">${score.toFixed(1)}</div></div><div class="bar"><i style="width:${Math.max(0,Math.min(100,b))}%"></i></div><div class="numbers"><span>🟢 ${b}%</span><span>⚪ 未標記 ${n}%</span><span>🔴 ${be}%</span></div><div class="meta">${s.mention_count||0} messages · tagged ${s.tagged_count||0} · confidence ${Math.round(Number(s.confidence||0)*100)}%</div><div class="summary">${esc(s.summary||"Stocktwits 暫無趨勢摘要。")}</div><div class="links"><a target="_blank" rel="noopener" href="${esc(s.source_url)}">Stocktwits</a>${(s.messages||[]).slice(0,3).map(m=>`<a target="_blank" rel="noopener" href="${esc(m.url)}">${esc(m.sentiment)}</a>`).join("")}</div></article>`}).join("")||'<div class="card">找不到相關美股 / ETF。</div>'}
+function formatDate(v){if(!v)return"—";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v);return d.toLocaleString("zh-HK",{timeZone:"Asia/Hong_Kong",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))} $("#search").addEventListener("input",()=>DATA&&draw(DATA.stocks||[]));load();
