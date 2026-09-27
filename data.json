@@ -1,9 +1,293 @@
 {
-  "generated_at": "2026-09-27 13:41 UTC",
-  "sources": [
-    "PTT",
-    "Dcard"
+  "generated_at": "2026-09-27T13:52:22.057590+00:00",
+  "status": "collected_no_ai_result",
+  "sources": {
+    "PTT": {
+      "status": "pttweb_mirror",
+      "items": 55
+    },
+    "Dcard": {
+      "status": "unavailable",
+      "items": 0
+    }
+  },
+  "total_items": 55,
+  "items": [
+    {
+      "source": "PTT",
+      "title": "分頁 (4置底文)",
+      "url": "https://www.pttweb.cc/bbs/Stock/page"
+    },
+    {
+      "source": "PTT",
+      "title": "[閒聊] 2026/09/25 盤後閒聊 2026/09/25 盤後閒聊 置底",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790296299.A.449"
+    },
+    {
+      "source": "PTT",
+      "title": "[公告] 4-6-1罰則將在1/22開始到年底加重至30天 4-6-1罰則將在1/22開始到年底加重至30天 置底",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1768934799.A.0E1"
+    },
+    {
+      "source": "PTT",
+      "title": "[公告] 股票板板規 v4.9 股票板板規 v4.9 置底",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1786082047.A.EA9"
+    },
+    {
+      "source": "PTT",
+      "title": "[公告] 交易工具異常回報區 交易工具異常回報區 置底",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1779384745.A.647"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 請教收益的記算方式 請教收益的記算方式",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790514849.A.DD2"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 基本面投資如何驗證自己錯了 基本面投資如何驗證自己錯了",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790505699.A.5C0"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [標的] 生達1720、邦特4107、儒鴻1476、宏全 Re: 生達1720、邦特4107、儒鴻1476、宏全",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 台鐵明年估又虧57億 將檢討票價 台鐵明年估又虧57億 將檢討票價",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790480527.A.3C5"
+    },
+    {
+      "source": "PTT",
+      "title": "[公告] MrTen 自刪標的(6152 百一) 水桶 MrTen 自刪標的(6152 百一) 水桶",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790478492.A.FC0"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] IIF示警：全球債務達365兆美元創新高 中 國增加最多 IIF示警：全球債務達365兆美元創新高 中",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790477196.A.FC8"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 新北將添2座新百貨！遠百進駐板橋TPARK 「宏匯二期」6000坪可逛 新北將添2座新百貨！遠百進駐板橋TPARK",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790475744.A.540"
+    },
+    {
+      "source": "PTT",
+      "title": "[標的] 2337旺宏 2337旺宏",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790475223.A.8BE"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 也是養、套、殺？伊朗總統公開訴苦 在中 國的資金受阻 無法匯出來 也是養、套、殺？伊朗總統公開訴苦 在中",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790471093.A.6C1"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] OpenAI模型再爆失控！試圖入侵美政府網站 商務部、證交會全遭殃 OpenAI模型再爆失控！試圖入侵美政府網站",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790450744.A.B9F"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 股市暴賺不想上班了！55歲以上掀退休潮 股市暴賺不想上班了！55歲以上掀退休潮",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790449068.A.345"
+    },
+    {
+      "source": "PTT",
+      "title": "[標的] 生達1720、邦特4107、儒鴻1476、宏全9939 生達1720、邦特4107、儒鴻1476、宏全9939",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 高股息ETF VS 債券型ETF 退休現金流都幾 高股息ETF VS 債券型ETF 退休現金流都幾 已刪文",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790439074.A.508"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 路透：中國監管部門要求貸款機構延長萬科 還款期 路透：中國監管部門要求貸款機構延長萬科",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790435703.A.E8B"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 伊朗警告川普別「犯錯」 否則中東所有美 軍基地將成箭靶 伊朗警告川普別「犯錯」 否則中東所有美",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790433515.A.8F1"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 豐田買中國零件 日經：日本本土供應商氣 炸 豐田買中國零件 日經：日本本土供應商氣",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790429980.A.B08"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790426046.A.8D4"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 比爾蓋茲警告：AI強大到足以造成「10 億 人死亡」 Re: 比爾蓋茲警告：AI強大到足以造成「10 億",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790423080.A.931"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 3481群創還值得續抱嗎？ 3481群創還值得續抱嗎？",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790421306.A.752"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790413575.A.6F7"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] OpenAI失控代理外洩53張ChatGPT用戶圖片 OpenAI失控代理外洩53張ChatGPT用戶圖片",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790405243.A.046"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 比爾蓋茲警告：AI強大到足以造成「10 億 人死亡」 比爾蓋茲警告：AI強大到足以造成「10 億",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790404071.A.845"
+    },
+    {
+      "source": "PTT",
+      "title": "[公告] 中秋水桶 中秋水桶",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790401336.A.561"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 台灣低利率時代掰了？謝金河「這指標轉弱 」不利台股：AI通膨央行準備好了嗎 台灣低利率時代掰了？謝金河「這指標轉弱",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790398499.A.E60"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] AI熱潮讓貿易逆差激增！美智庫報告警告白 宮：不要用關稅找台灣麻煩 AI熱潮讓貿易逆差激增！美智庫報告警告白",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790394242.A.C3B"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 川普拒絕停火,預計期中選舉後恢復轟炸 川普拒絕停火,預計期中選舉後恢復轟炸",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790390550.A.8A6"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790389061.A.46B"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 被動元件廠迎拉貨潮 被動元件廠迎拉貨潮",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790384791.A.C66"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 「雙方已達成協議」美國貿易代表：28日公 布與陸貿易談判細節 「雙方已達成協議」美國貿易代表：28日公",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790352554.A.9F4"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 三星追趕台積 快看不到車尾燈 三星追趕台積 快看不到車尾燈",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790351427.A.761"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 台灣2026經濟成長率 ADB上修至11％ 台灣2026經濟成長率 ADB上修至11％",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790346761.A.207"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] AI代理掀長期硬體需求！戴爾示警「記憶體 」、「HDD」短缺恐延續逾5年 AI代理掀長期硬體需求！戴爾示警「記憶體",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790346540.A.D17"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] AI 浪潮高檔調節 戴爾高層本月集體「套 現」近3,200萬美元 AI 浪潮高檔調節 戴爾高層本月集體「套",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790341873.A.0D2"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 伊朗提議7天內重啟荷莫茲海峽 待美方回應 伊朗提議7天內重啟荷莫茲海峽 待美方回應",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790339746.A.4DA"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 馬斯克稱SpaceX AI項目加速發展 預計半年 內達到領先 馬斯克稱SpaceX AI項目加速發展 預計半年",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790339030.A.E19"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [情報] 伊朗總統佩澤希齊揚：我們已經達成了一項協議 Re: 伊朗總統佩澤希齊揚：我們已經達成了一項協議",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790331894.A.1F6"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 勇鷹號交機 漢翔拓無人機商機 勇鷹號交機 漢翔拓無人機商機",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790331759.A.8F9"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 匯豐持續節流！繼取消香港員工子女學費補 貼，「私人會所」津貼也走入歷史 匯豐持續節流！繼取消香港員工子女學費補",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790329354.A.73A"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 中秋變盤免驚！郭哲榮看好年底衝53K 中秋變盤免驚！郭哲榮看好年底衝53K",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790328000.A.00D"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [請益] 全押0050的人為何不全壓00631L ?? Re: 全押0050的人為何不全壓00631L ??",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
+    },
+    {
+      "source": "PTT",
+      "title": "[情報] 伊朗總統：我們已經達成了一項協議 伊朗總統：我們已經達成了一項協議",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790308723.A.903"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 散戶有多瘋？龍頭券商融資逼近2千億 散戶有多瘋？龍頭券商融資逼近2千億",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790308332.A.C88"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 誤發附件！大摩亞洲交易資訊意外洩露 誤發附件！大摩亞洲交易資訊意外洩露",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790307509.A.90D"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790307232.A.252"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 滿手台股正二，美股還會買QQQ嗎？ 滿手台股正二，美股還會買QQQ嗎？",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790307066.A.3E3"
+    },
+    {
+      "source": "PTT",
+      "title": "[新聞] 董座稱「記憶體不缺」！郭哲榮重砲開轟別 買宏碁股票：看不懂AI趨勢 董座稱「記憶體不缺」！郭哲榮重砲開轟別",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790305256.A.567"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790304270.A.363"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益] 記憶體榮景還能維持多久 記憶體榮景還能維持多久 已刪文",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790302985.A.24E"
+    },
+    {
+      "source": "PTT",
+      "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790301990.A.7C6"
+    },
+    {
+      "source": "PTT",
+      "title": "[請益]用SPYI ETF取代SPY ETF？ 用SPYI ETF取代SPY ETF？",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
+    }
   ],
-  "status": "collector-only",
   "stocks": []
 }
