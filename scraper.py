@@ -7,28 +7,20 @@ from pathlib import Path
 import requests
 
 DATA_FILE = Path("data.json")
+WATCHLIST_FILE = Path("watchlist.json")
 
 ST_BASE = "https://api.stocktwits.com/api/2"
 ST_TRENDING = f"{ST_BASE}/trending/symbols/equities.json"
 ST_STREAM = f"{ST_BASE}/streams/symbol/{{symbol}}.json"
 
-# Discovery + permanent monitoring.
 TRENDING_SYMBOLS = int(os.getenv("TRENDING_SYMBOLS", "10"))
 MESSAGES_PER_SYMBOL = min(int(os.getenv("MESSAGES_PER_SYMBOL", "30")), 30)
 REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "0.25"))
 
-# Change this list any time. ONDS is included because it is one of the
-# symbols previously requested for Catlion monitoring.
 DEFAULT_WATCHLIST = [
     "ONDS", "NVDA", "AMD", "TSLA", "AAPL",
     "MSFT", "AMZN", "META", "GOOGL", "AVGO",
     "PLTR", "SOFI", "RKLB", "SPY", "QQQ",
-]
-
-WATCHLIST = [
-    x.strip().upper()
-    for x in os.getenv("WATCHLIST", ",".join(DEFAULT_WATCHLIST)).split(",")
-    if x.strip()
 ]
 
 HEADERS = {
@@ -42,6 +34,37 @@ session.headers.update(HEADERS)
 
 def clean_text(value):
     return " ".join(str(value or "").split()).strip()
+
+
+def normalize_watchlist(values):
+    result = []
+    seen = set()
+    for value in values:
+        symbol = clean_text(value).upper()
+        if not symbol or symbol in seen or len(symbol) > 10:
+            continue
+        result.append(symbol)
+        seen.add(symbol)
+    return result
+
+
+def load_watchlist():
+    env_value = clean_text(os.getenv("WATCHLIST", ""))
+    if env_value:
+        return normalize_watchlist(env_value.split(","))
+
+    try:
+        config = json.loads(WATCHLIST_FILE.read_text(encoding="utf-8"))
+        watchlist = normalize_watchlist(config.get("watchlist", []))
+        if watchlist:
+            return watchlist
+    except Exception as exc:
+        print(f"watchlist.json unavailable: {exc}")
+
+    return DEFAULT_WATCHLIST[:]
+
+
+WATCHLIST = load_watchlist()
 
 
 def get_json(url, params=None):
@@ -133,9 +156,7 @@ def analyze_symbol(meta, messages, discovery_type):
             "created_at": message.get("created_at"),
             "sentiment": sentiment,
             "discussion": bool(message.get("discussion", False)),
-            "replies": int(
-                ((message.get("conversation") or {}).get("replies") or 0)
-            ),
+            "replies": int(((message.get("conversation") or {}).get("replies") or 0)),
             "likes": int(((message.get("likes") or {}).get("total") or 0)),
             "url": (
                 f"https://stocktwits.com/message/{message_id}"
@@ -195,7 +216,7 @@ def write_data(data):
 
 
 def main():
-    print("Catlion V7 collector starting...")
+    print("Catlion V8 collector starting...")
     print(f"Permanent watchlist: {', '.join(WATCHLIST)}")
 
     previous = load_previous_data()
@@ -207,8 +228,8 @@ def main():
         print(f"Stocktwits trending unavailable: {exc}")
         trending = []
 
-    # Watchlist is always retained even if trending discovery fails.
     candidates = {}
+
     for symbol in WATCHLIST:
         candidates[symbol] = {
             "ticker": symbol,
@@ -224,7 +245,6 @@ def main():
     for meta in trending:
         candidates.setdefault(meta["ticker"], meta)
 
-    # Trending data enriches watchlist entries when the same ticker appears.
     for meta in trending:
         if meta["ticker"] in candidates:
             candidates[meta["ticker"]].update(meta)
@@ -240,7 +260,6 @@ def main():
         preserved["generated_at"] = datetime.now(timezone.utc).isoformat()
         preserved["status"] = "sources_unavailable"
         write_data(preserved)
-        print("No symbols available. Preserved previous data.json.")
         return
 
     stocks = []
@@ -254,15 +273,10 @@ def main():
             messages, symbol_info = fetch_symbol_messages(ticker)
 
             if symbol_info:
-                meta["name"] = clean_text(
-                    symbol_info.get("title") or meta["name"]
-                )
-                meta["exchange"] = clean_text(
-                    symbol_info.get("exchange") or meta["exchange"]
-                )
+                meta["name"] = clean_text(symbol_info.get("title") or meta["name"])
+                meta["exchange"] = clean_text(symbol_info.get("exchange") or meta["exchange"])
                 meta["instrument_class"] = (
-                    symbol_info.get("instrument_class")
-                    or meta["instrument_class"]
+                    symbol_info.get("instrument_class") or meta["instrument_class"]
                 )
 
             stock = analyze_symbol(meta, messages, discovery)
@@ -297,13 +311,12 @@ def main():
         preserved["generated_at"] = datetime.now(timezone.utc).isoformat()
         preserved["status"] = "streams_unavailable"
         write_data(preserved)
-        print("No symbol streams collected. Preserved previous data.json.")
         return
 
     data = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "status": "ok",
-        "version": "v7",
+        "version": "v8",
         "source_type": "US social sentiment",
         "watchlist": WATCHLIST,
         "sources": {
@@ -321,10 +334,7 @@ def main():
     }
 
     write_data(data)
-    print(
-        f"Wrote data.json symbols={len(stocks)} "
-        f"messages={len(all_items)}"
-    )
+    print(f"Wrote data.json symbols={len(stocks)} messages={len(all_items)}")
 
 
 if __name__ == "__main__":
