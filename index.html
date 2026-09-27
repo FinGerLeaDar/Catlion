@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
   <title>Catlion · US Stock Social Sentiment</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,19 +20,37 @@
   <section class="hero">
     <div>
       <h1>今日美股社群情緒</h1>
-      <p>固定監察 Watchlist，同時加入 Stocktwits Trending 發現新股票。</p>
+      <p>固定監察 Watchlist；另外追蹤 Stocktwits Trending 發現新股票。</p>
     </div>
-    <input id="search" type="search" placeholder="搜尋 ONDS、NVDA、SPY、QQQ…">
+    <div class="search-wrap">
+      <label class="sr-only" for="search">搜尋股票</label>
+      <input id="search" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="搜尋 ONDS、NVDA、SPY、QQQ…">
+      <button id="clearSearch" type="button" aria-label="清除搜尋">×</button>
+    </div>
   </section>
 
   <section id="stats" class="stats"></section>
 
   <section>
     <div class="section-title">
-      <h2>美股 / ETF</h2>
-      <span id="sourceNote"></span>
+      <div>
+        <h2>⭐ 我的 Watchlist</h2>
+        <span>固定監察股票 / ETF</span>
+      </div>
+      <span id="watchlistNote"></span>
     </div>
-    <div id="stocks" class="grid"></div>
+    <div id="watchlistStocks" class="grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title trend-title">
+      <div>
+        <h2>🔥 Stocktwits Trending</h2>
+        <span>今日額外發現</span>
+      </div>
+      <span id="trendingNote"></span>
+    </div>
+    <div id="trendingStocks" class="grid"></div>
   </section>
 </main>
 
