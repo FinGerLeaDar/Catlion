@@ -1,47 +1,28 @@
 {
-  "generated_at": "2026-09-27T13:58:11.824162+00:00",
+  "generated_at": "2026-09-27T14:15:05.258492+00:00",
   "status": "ok",
+  "version": "v4",
   "sources": {
     "PTT": {
       "status": "pttweb_mirror",
-      "items": 55
+      "items": 48
     },
     "Dcard": {
       "status": "unavailable",
       "items": 0
     }
   },
-  "total_items": 55,
+  "total_items": 48,
   "items": [
-    {
-      "source": "PTT",
-      "title": "分頁 (4置底文)",
-      "url": "https://www.pttweb.cc/bbs/Stock/page"
-    },
-    {
-      "source": "PTT",
-      "title": "[閒聊] 2026/09/25 盤後閒聊 2026/09/25 盤後閒聊 置底",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1790296299.A.449"
-    },
-    {
-      "source": "PTT",
-      "title": "[公告] 4-6-1罰則將在1/22開始到年底加重至30天 4-6-1罰則將在1/22開始到年底加重至30天 置底",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1768934799.A.0E1"
-    },
-    {
-      "source": "PTT",
-      "title": "[公告] 股票板板規 v4.9 股票板板規 v4.9 置底",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1786082047.A.EA9"
-    },
-    {
-      "source": "PTT",
-      "title": "[公告] 交易工具異常回報區 交易工具異常回報區 置底",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1779384745.A.647"
-    },
     {
       "source": "PTT",
       "title": "[請益] 請教收益的記算方式 請教收益的記算方式",
       "url": "https://www.pttweb.cc/bbs/Stock/M.1790514849.A.DD2"
+    },
+    {
+      "source": "PTT",
+      "title": "[情報] 2509 全坤建 全坤御峰工地火災事件說明 2509 全坤建 全坤御峰工地火災事件說明",
+      "url": "https://www.pttweb.cc/bbs/Stock/M.1790507488.A.444"
     },
     {
       "source": "PTT",
@@ -57,11 +38,6 @@
       "source": "PTT",
       "title": "[新聞] 台鐵明年估又虧57億 將檢討票價 台鐵明年估又虧57億 將檢討票價",
       "url": "https://www.pttweb.cc/bbs/Stock/M.1790480527.A.3C5"
-    },
-    {
-      "source": "PTT",
-      "title": "[公告] MrTen 自刪標的(6152 百一) 水桶 MrTen 自刪標的(6152 百一) 水桶",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1790478492.A.FC0"
     },
     {
       "source": "PTT",
@@ -147,11 +123,6 @@
       "source": "PTT",
       "title": "[新聞] 比爾蓋茲警告：AI強大到足以造成「10 億 人死亡」 比爾蓋茲警告：AI強大到足以造成「10 億",
       "url": "https://www.pttweb.cc/bbs/Stock/M.1790404071.A.845"
-    },
-    {
-      "source": "PTT",
-      "title": "[公告] 中秋水桶 中秋水桶",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1790401336.A.561"
     },
     {
       "source": "PTT",
@@ -282,22 +253,31 @@
       "source": "PTT",
       "title": "Re: [新聞] 最低工資首度突破3萬元 傳統產業承受壓力 Re: 最低工資首度突破3萬元 傳統產業承受壓力",
       "url": "https://www.pttweb.cc/bbs/Stock/M.1790301990.A.7C6"
-    },
-    {
-      "source": "PTT",
-      "title": "[請益]用SPYI ETF取代SPY ETF？ 用SPYI ETF取代SPY ETF？",
-      "url": "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
     }
   ],
   "stocks": [
+    {
+      "ticker": "2509",
+      "name": "全坤建",
+      "bullish": 0,
+      "neutral": 100,
+      "bearish": 0,
+      "confidence": 0.8,
+      "summary": "討論全坤建全坤御峰工地火災事件說明。",
+      "mention_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790507488.A.444"
+      ]
+    },
     {
       "ticker": "1720",
       "name": "生達",
       "bullish": 50,
       "neutral": 50,
       "bearish": 0,
-      "summary": "生達等標的相關討論與驗證。",
-      "discussion_count": 2,
+      "confidence": 0.5,
+      "summary": "被提及於標的討論中。",
+      "mention_count": 2,
       "sources": [
         "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
         "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
@@ -309,8 +289,9 @@
       "bullish": 50,
       "neutral": 50,
       "bearish": 0,
-      "summary": "邦特相關標的之討論。",
-      "discussion_count": 2,
+      "confidence": 0.5,
+      "summary": "被提及於標的討論中。",
+      "mention_count": 2,
       "sources": [
         "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
         "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
@@ -322,36 +303,12 @@
       "bullish": 50,
       "neutral": 50,
       "bearish": 0,
-      "summary": "儒鴻相關標的之討論。",
-      "discussion_count": 2,
+      "confidence": 0.5,
+      "summary": "被提及於標的討論中。",
+      "mention_count": 2,
       "sources": [
         "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
         "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
-      ]
-    },
-    {
-      "ticker": "9939",
-      "name": "宏全",
-      "bullish": 50,
-      "neutral": 50,
-      "bearish": 0,
-      "summary": "宏全相關標的之討論。",
-      "discussion_count": 2,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
-        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
-      ]
-    },
-    {
-      "ticker": "6152",
-      "name": "百一",
-      "bullish": 0,
-      "neutral": 100,
-      "bearish": 0,
-      "summary": "關於百一自刪標的與水桶公告之討論。",
-      "discussion_count": 1,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790478492.A.FC0"
       ]
     },
     {
@@ -360,82 +317,64 @@
       "bullish": 50,
       "neutral": 50,
       "bearish": 0,
-      "summary": "旺宏相關標的之討論。",
-      "discussion_count": 1,
+      "confidence": 0.5,
+      "summary": "旺宏相關標的討論。",
+      "mention_count": 1,
       "sources": [
         "https://www.pttweb.cc/bbs/Stock/M.1790475223.A.8BE"
       ]
     },
     {
+      "ticker": "9939",
+      "name": "宏全",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "confidence": 0.5,
+      "summary": "被提及於標的討論中。",
+      "mention_count": 2,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
+        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+      ]
+    },
+    {
       "ticker": "3481",
       "name": "群創",
-      "bullish": 20,
+      "bullish": 30,
       "neutral": 50,
-      "bearish": 30,
-      "summary": "討論群創是否還值得續抱。",
-      "discussion_count": 1,
+      "bearish": 20,
+      "confidence": 0.6,
+      "summary": "請益群創是否還值得續抱。",
+      "mention_count": 1,
       "sources": [
         "https://www.pttweb.cc/bbs/Stock/M.1790421306.A.752"
       ]
     },
     {
       "ticker": "0050",
-      "name": "",
-      "bullish": 40,
-      "neutral": 40,
-      "bearish": 20,
-      "summary": "討論全押0050與其他槓桿型ETF的比較。",
-      "discussion_count": 1,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
-      ]
-    },
-    {
-      "ticker": "00631L",
-      "name": "",
-      "bullish": 60,
-      "neutral": 30,
-      "bearish": 10,
-      "summary": "討論為何不全壓00631L的相關配置看法。",
-      "discussion_count": 1,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
-      ]
-    },
-    {
-      "ticker": "QQQ",
-      "name": "",
+      "name": "元大台灣50",
       "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "confidence": 0.6,
+      "summary": "討論全押0050與00631L的比較。",
+      "mention_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
+      ]
+    },
+    {
+      "ticker": "2353",
+      "name": "宏碁",
+      "bullish": 10,
       "neutral": 40,
-      "bearish": 10,
-      "summary": "討論持有台股正二時是否還會買美股QQQ。",
-      "discussion_count": 1,
+      "bearish": 50,
+      "confidence": 0.7,
+      "summary": "新聞提及分析師呼籲別買宏碁股票，引發討論。",
+      "mention_count": 1,
       "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790307066.A.3E3"
-      ]
-    },
-    {
-      "ticker": "SPYI",
-      "name": "",
-      "bullish": 40,
-      "neutral": 50,
-      "bearish": 10,
-      "summary": "討論是否用SPYI ETF取代SPY ETF。",
-      "discussion_count": 1,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
-      ]
-    },
-    {
-      "ticker": "SPY",
-      "name": "",
-      "bullish": 40,
-      "neutral": 50,
-      "bearish": 10,
-      "summary": "討論以SPYI ETF取代SPY ETF的可能性。",
-      "discussion_count": 1,
-      "sources": [
-        "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
+        "https://www.pttweb.cc/bbs/Stock/M.1790305256.A.567"
       ]
     }
   ]
