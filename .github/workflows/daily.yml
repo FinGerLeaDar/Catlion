@@ -11,29 +11,25 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Collect PTT and Dcard data
+      - name: Collect US social sentiment
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          MAX_ITEMS: "80"
+          MAX_SYMBOLS: "15"
+          MESSAGES_PER_SYMBOL: "30"
+          REQUEST_DELAY: "0.25"
         run: python scraper.py
-
       - name: Save updated data.json
         run: |
           git config user.name "catlion-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git diff --cached --quiet || git commit -m "chore: update social sentiment data"
+          git diff --cached --quiet || git commit -m "chore: update US social sentiment data"
           git push
