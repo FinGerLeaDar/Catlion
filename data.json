@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-27T13:52:22.057590+00:00",
-  "status": "collected_no_ai_result",
+  "generated_at": "2026-09-27T13:58:11.824162+00:00",
+  "status": "ok",
   "sources": {
     "PTT": {
       "status": "pttweb_mirror",
@@ -289,5 +289,154 @@
       "url": "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
     }
   ],
-  "stocks": []
+  "stocks": [
+    {
+      "ticker": "1720",
+      "name": "生達",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "summary": "生達等標的相關討論與驗證。",
+      "discussion_count": 2,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
+        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+      ]
+    },
+    {
+      "ticker": "4107",
+      "name": "邦特",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "summary": "邦特相關標的之討論。",
+      "discussion_count": 2,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
+        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+      ]
+    },
+    {
+      "ticker": "1476",
+      "name": "儒鴻",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "summary": "儒鴻相關標的之討論。",
+      "discussion_count": 2,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
+        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+      ]
+    },
+    {
+      "ticker": "9939",
+      "name": "宏全",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "summary": "宏全相關標的之討論。",
+      "discussion_count": 2,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790499025.A.7E0",
+        "https://www.pttweb.cc/bbs/Stock/M.1790440627.A.4F7"
+      ]
+    },
+    {
+      "ticker": "6152",
+      "name": "百一",
+      "bullish": 0,
+      "neutral": 100,
+      "bearish": 0,
+      "summary": "關於百一自刪標的與水桶公告之討論。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790478492.A.FC0"
+      ]
+    },
+    {
+      "ticker": "2337",
+      "name": "旺宏",
+      "bullish": 50,
+      "neutral": 50,
+      "bearish": 0,
+      "summary": "旺宏相關標的之討論。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790475223.A.8BE"
+      ]
+    },
+    {
+      "ticker": "3481",
+      "name": "群創",
+      "bullish": 20,
+      "neutral": 50,
+      "bearish": 30,
+      "summary": "討論群創是否還值得續抱。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790421306.A.752"
+      ]
+    },
+    {
+      "ticker": "0050",
+      "name": "",
+      "bullish": 40,
+      "neutral": 40,
+      "bearish": 20,
+      "summary": "討論全押0050與其他槓桿型ETF的比較。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
+      ]
+    },
+    {
+      "ticker": "00631L",
+      "name": "",
+      "bullish": 60,
+      "neutral": 30,
+      "bearish": 10,
+      "summary": "討論為何不全壓00631L的相關配置看法。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790326816.A.3C3"
+      ]
+    },
+    {
+      "ticker": "QQQ",
+      "name": "",
+      "bullish": 50,
+      "neutral": 40,
+      "bearish": 10,
+      "summary": "討論持有台股正二時是否還會買美股QQQ。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790307066.A.3E3"
+      ]
+    },
+    {
+      "ticker": "SPYI",
+      "name": "",
+      "bullish": 40,
+      "neutral": 50,
+      "bearish": 10,
+      "summary": "討論是否用SPYI ETF取代SPY ETF。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
+      ]
+    },
+    {
+      "ticker": "SPY",
+      "name": "",
+      "bullish": 40,
+      "neutral": 50,
+      "bearish": 10,
+      "summary": "討論以SPYI ETF取代SPY ETF的可能性。",
+      "discussion_count": 1,
+      "sources": [
+        "https://www.pttweb.cc/bbs/Stock/M.1790300805.A.8B0"
+      ]
+    }
+  ]
 }
