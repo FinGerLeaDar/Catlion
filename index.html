@@ -1,118 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <title>Catlion · US Stock Social Sentiment</title>
-  <link rel="stylesheet" href="style.css?v=11">
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Catlion · US Stock Social Sentiment</title><link rel="stylesheet" href="style.css?v=12"></head>
 <body>
-<header class="topbar">
-  <div>
-    <div class="brand">🦁 Catlion</div>
-    <div class="sub">US Stocks / ETFs · Watchlist + Trending</div>
-  </div>
-  <div>
-    <div id="updated" class="updated">Loading…</div>
-    <div id="loadStatus" class="load-status">初始化…</div>
-  </div>
-</header>
-
+<header class="topbar"><div><div class="brand">🦁 Catlion</div><div class="sub">US Stocks / ETFs · Watchlist + Trending</div></div><div><div id="updated" class="updated">Loading…</div><div id="loadStatus" class="load-status">初始化…</div></div></header>
 <main>
-  <section class="hero">
-    <div>
-      <h1>今日美股社群情緒</h1>
-      <p>固定監察 Watchlist；另外追蹤 Stocktwits Trending 發現新股票。</p>
-    </div>
-    <div class="search-wrap">
-      <label class="sr-only" for="search">搜尋股票</label>
-      <input id="search" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="搜尋 ONDS、NVDA、SPY、QQQ…">
-      <button id="clearSearch" type="button" aria-label="清除搜尋">×</button>
-    </div>
-  </section>
-
-  <section class="toolbar">
-    <div class="toolbar-group">
-      <button id="manageWatchlist" class="primary-btn" type="button">⚙️ Manage Watchlist</button>
-      <div class="filters" role="group" aria-label="Watchlist filter">
-        <button type="button" data-filter="all" class="filter-btn active">全部</button>
-        <button type="button" data-filter="bullish" class="filter-btn">🟢 Bullish</button>
-        <button type="button" data-filter="neutral" class="filter-btn">⚪ Neutral</button>
-        <button type="button" data-filter="bearish" class="filter-btn">🔴 Bearish</button>
-      </div>
-    </div>
-    <div class="sort-wrap">
-      <label for="sortSelect">排序</label>
-      <select id="sortSelect">
-        <option value="my-order">我的順序</option>
-        <option value="score-desc">Sentiment 高 → 低</option>
-        <option value="score-asc">Sentiment 低 → 高</option>
-        <option value="bullish-desc">Bullish % 高 → 低</option>
-        <option value="bearish-desc">Bearish % 高 → 低</option>
-        <option value="messages-desc">Messages 多 → 少</option>
-        <option value="confidence-desc">Confidence 高 → 低</option>
-        <option value="ticker-asc">Ticker A → Z</option>
-      </select>
-    </div>
-  </section>
-
-  <section id="stats" class="stats"></section>
-
-  <section>
-    <div class="section-title">
-      <div>
-        <h2>⭐ 我的 Watchlist</h2>
-        <span>可自訂、拖拉排序、Filter / Sort</span>
-      </div>
-      <span id="watchlistNote"></span>
-    </div>
-    <div id="watchlistStocks" class="grid"></div>
-  </section>
-
-  <section>
-    <div class="section-title trend-title">
-      <div>
-        <h2>🔥 Stocktwits Trending</h2>
-        <span>今日額外發現</span>
-      </div>
-      <span id="trendingNote"></span>
-    </div>
-    <div id="trendingStocks" class="grid"></div>
-  </section>
+<section class="hero"><div><h1>今日美股社群情緒</h1><p>固定監察 Watchlist；另外追蹤 Stocktwits Trending 發現新股票。</p></div><div class="search-wrap"><label class="sr-only" for="search">搜尋股票</label><input id="search" type="search" autocomplete="off" placeholder="搜尋 ONDS、NVDA、SPY、QQQ…"><button id="clearSearch" type="button">×</button></div></section>
+<section class="toolbar"><div class="toolbar-group"><button id="manageWatchlist" class="primary-btn" type="button">⚙️ Manage Watchlist</button><div class="filters"><button type="button" data-filter="all" class="filter-btn active">全部</button><button type="button" data-filter="bullish" class="filter-btn">🟢 Bullish</button><button type="button" data-filter="neutral" class="filter-btn">⚪ Neutral</button><button type="button" data-filter="bearish" class="filter-btn">🔴 Bearish</button></div></div><div class="sort-wrap"><label for="sortSelect">排序</label><select id="sortSelect"><option value="my-order">我的順序</option><option value="score-desc">Sentiment 高 → 低</option><option value="score-asc">Sentiment 低 → 高</option><option value="bullish-desc">Bullish % 高 → 低</option><option value="bearish-desc">Bearish % 高 → 低</option><option value="messages-desc">Messages 多 → 少</option><option value="confidence-desc">Confidence 高 → 低</option><option value="price-desc">Price 高 → 低</option><option value="price-asc">Price 低 → 高</option><option value="ticker-asc">Ticker A → Z</option></select></div></section>
+<section id="stats" class="stats"></section>
+<section><div class="section-title"><div><h2>⭐ 我的 Watchlist</h2><span>可自訂、拖拉排序、Filter / Sort</span></div><span id="watchlistNote"></span></div><div id="watchlistStocks" class="grid"></div></section>
+<section><div class="section-title trend-title"><div><h2>🔥 Stocktwits Trending</h2><span>今日額外發現</span></div><span id="trendingNote"></span></div><div id="trendingStocks" class="grid"></div></section>
 </main>
-
-<div id="watchlistModal" class="modal" aria-hidden="true">
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-head">
-      <div>
-        <h2 id="modalTitle">⚙️ Manage Watchlist</h2>
-        <p>新增 / 移除 / 拖拉排序。設定會先儲存在呢部裝置。</p>
-      </div>
-      <button id="closeModal" class="icon-btn" type="button" aria-label="關閉">×</button>
-    </div>
-
-    <div class="add-row">
-      <input id="addTicker" type="text" maxlength="10" autocomplete="off" placeholder="輸入 Ticker，例如 RKLB">
-      <button id="addTickerBtn" class="primary-btn" type="button">＋ Add</button>
-    </div>
-
-    <div id="manageList" class="manage-list"></div>
-
-    <div class="modal-actions">
-      <button id="resetWatchlist" class="ghost-btn" type="button">↺ 恢復 Repo Watchlist</button>
-      <button id="exportWatchlist" class="ghost-btn" type="button">⇩ Export watchlist.json</button>
-      <button id="saveManager" class="primary-btn" type="button">儲存順序</button>
-    </div>
-
-    <div class="modal-note">
-      <b>⚠️ 注意：</b> GitHub Pages 係 static site。Add / Remove / Sort 會即時儲存在你目前瀏覽器；
-      如要令 GitHub Actions 每日真正監察新 ticker，請 Export <code>watchlist.json</code>，
-      然後放返 GitHub repo 根目錄。
-    </div>
-  </div>
-</div>
-
-<script src="app.js?v=11"></script>
-</body>
-</html>
+<div id="watchlistModal" class="modal" aria-hidden="true"><div class="modal-box" role="dialog" aria-modal="true"><div class="modal-head"><div><h2>⚙️ Manage Watchlist</h2><p>新增 / 移除 / 拖拉排序。設定會先儲存在呢部裝置。</p></div><button id="closeModal" class="icon-btn" type="button">×</button></div><div class="add-row"><input id="addTicker" type="text" maxlength="10" autocomplete="off" placeholder="輸入 Ticker，例如 RKLB"><button id="addTickerBtn" class="primary-btn" type="button">＋ Add</button></div><div id="manageList" class="manage-list"></div><div class="modal-actions"><button id="resetWatchlist" class="ghost-btn" type="button">↺ 恢復 Repo Watchlist</button><button id="exportWatchlist" class="ghost-btn" type="button">⇩ Export watchlist.json</button><button id="saveManager" class="primary-btn" type="button">儲存順序</button></div><div class="modal-note"><b>⚠️ 注意：</b> GitHub Pages 係 static site。Add / Remove / Sort 會先儲存在目前瀏覽器；如要令 GitHub Actions 每日真正監察新 ticker，請 Export <code>watchlist.json</code> 後放返 repo 根目錄。</div></div></div>
+<script src="app.js?v=12"></script>
+</body></html>
