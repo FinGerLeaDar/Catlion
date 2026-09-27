@@ -1,7 +1,6 @@
 import json
 import os
 import re
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin
@@ -22,7 +21,14 @@ DATA_FILE = Path("data.json")
 
 PTT_DIRECT_URL = "https://www.ptt.cc/bbs/Stock/index.html"
 PTT_MIRROR_URL = "https://www.pttweb.cc/bbs/Stock"
-DCARD_API_URL = "https://www.dcard.tw/service/api/v2/forums/stock/posts"
+
+# Dcard currently has more than one public web/API route in use.
+# GitHub-hosted runners can be blocked by Dcard's edge protection, so try
+# both known routes before declaring the source unavailable.
+DCARD_ENDPOINTS = [
+    "https://www.dcard.tw/service/api/v2/forums/stock/posts",
+    "https://www.dcard.tw/_api/forums/stock/posts",
+]
 
 HEADERS = {
     "User-Agent": (
@@ -31,20 +37,30 @@ HEADERS = {
         "Chrome/131.0.0.0 Safari/537.36"
     ),
     "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.7",
-    "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+    "Accept": "application/json,text/html;q=0.9,*/*;q=0.8",
+    "Referer": "https://www.dcard.tw/f/stock",
 }
 
 
 def get_json(url, params=None, timeout=25):
-    r = requests.get(url, headers=HEADERS, params=params, timeout=timeout)
-    r.raise_for_status()
-    return r.json()
+    response = requests.get(
+        url,
+        headers=HEADERS,
+        params=params,
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    return response.json()
 
 
 def get_html(url, timeout=25):
-    r = requests.get(url, headers=HEADERS, timeout=timeout)
-    r.raise_for_status()
-    return r.text
+    response = requests.get(
+        url,
+        headers=HEADERS,
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    return response.text
 
 
 def clean_text(value):
@@ -54,31 +70,34 @@ def clean_text(value):
 
 
 def fetch_ptt():
-    """Try official PTT first. If GitHub Actions gets 403, use the public PTTWeb mirror."""
     errors = []
 
-    # Official PTT
     try:
         html = get_html(PTT_DIRECT_URL)
         soup = BeautifulSoup(html, "html.parser")
         items = []
+
         for a in soup.select("div.r-ent div.title a"):
             title = clean_text(a.get_text(" ", strip=True))
             href = a.get("href")
             if not title or not href:
                 continue
+
             items.append({
                 "source": "PTT",
                 "title": title,
                 "url": urljoin("https://www.ptt.cc", href),
             })
+
         if items:
             return items[:MAX_ITEMS], "official"
-        errors.append("official PTT returned no article links")
-    except Exception as e:
-        errors.append(f"official PTT: {e}")
 
-    # PTTWeb mirror — avoids silently returning zero when ptt.cc blocks GitHub runner IPs.
+        errors.append("official PTT returned no article links")
+    except Exception as exc:
+        errors.append(f"official PTT: {exc}")
+
+    # GitHub Actions runners can receive 403 from ptt.cc.
+    # Try a public mirror before giving up.
     try:
         html = get_html(PTT_MIRROR_URL)
         soup = BeautifulSoup(html, "html.parser")
@@ -87,69 +106,77 @@ def fetch_ptt():
         for a in soup.select("a[href*='/bbs/Stock/']"):
             title = clean_text(a.get_text(" ", strip=True))
             href = a.get("href")
+
             if not title or not href:
                 continue
-            # Ignore navigation links such as "最新 / 熱門 / 分頁".
+
             if title in {"最新", "熱門", "分頁", "搜尋", "自訂"}:
                 continue
-            if title.startswith("[") or title.startswith("Re:") or title:
-                items.append({
-                    "source": "PTT",
-                    "title": title,
-                    "url": urljoin("https://www.pttweb.cc", href),
-                })
 
-        # De-duplicate while preserving order.
+            items.append({
+                "source": "PTT",
+                "title": title,
+                "url": urljoin("https://www.pttweb.cc", href),
+            })
+
         seen = set()
         unique = []
         for item in items:
-            key = item["url"]
-            if key in seen:
+            if item["url"] in seen:
                 continue
-            seen.add(key)
+            seen.add(item["url"])
             unique.append(item)
 
         if unique:
             return unique[:MAX_ITEMS], "pttweb_mirror"
+
         errors.append("PTTWeb mirror returned no article links")
-    except Exception as e:
-        errors.append(f"PTTWeb mirror: {e}")
+    except Exception as exc:
+        errors.append(f"PTTWeb mirror: {exc}")
 
     print("PTT unavailable:", " | ".join(errors))
     return [], "unavailable"
 
 
+def parse_dcard_posts(data):
+    posts = data.get("posts", data if isinstance(data, list) else [])
+    items = []
+
+    for post in posts:
+        post_id = post.get("id")
+        title = clean_text(post.get("title"))
+
+        if not title or not post_id:
+            continue
+
+        items.append({
+            "source": "Dcard",
+            "title": title,
+            "url": f"https://www.dcard.tw/f/stock/p/{post_id}",
+        })
+
+    return items
+
+
 def fetch_dcard():
-    """Use Dcard's public forum-post JSON endpoint instead of scraping the HTML page."""
     errors = []
 
-    # Current endpoint used by Dcard's web client / community tooling.
-    for params in (
-        {"limit": min(MAX_ITEMS, 100), "popular": "false"},
-        {"limit": min(MAX_ITEMS, 30), "popular": "false"},
-    ):
-        try:
-            data = get_json(DCARD_API_URL, params=params)
-            posts = data.get("posts", data if isinstance(data, list) else [])
-            items = []
+    for endpoint in DCARD_ENDPOINTS:
+        for params in (
+            {"limit": min(MAX_ITEMS, 100), "popular": "false"},
+            {"limit": min(MAX_ITEMS, 30), "popular": "false"},
+        ):
+            try:
+                data = get_json(endpoint, params=params)
+                items = parse_dcard_posts(data)
 
-            for post in posts:
-                post_id = post.get("id")
-                title = clean_text(post.get("title"))
-                if not title or not post_id:
-                    continue
+                if items:
+                    route = "_api" if "/_api/" in endpoint else "service_api_v2"
+                    return items[:MAX_ITEMS], route
 
-                items.append({
-                    "source": "Dcard",
-                    "title": title,
-                    "url": f"https://www.dcard.tw/f/stock/p/{post_id}",
-                })
-
-            if items:
-                return items[:MAX_ITEMS], "api"
-
-        except Exception as e:
-            errors.append(str(e))
+                errors.append(f"{endpoint}: empty response")
+            except Exception as exc:
+                errors.append(f"{endpoint}: {exc}")
 
     print("Dcard unavailable:", " | ".join(errors))
     return [], "unavailable"
@@ -177,22 +204,25 @@ def load_existing():
         }
 
 
-def merge_items(ptt_items, dcard_items):
+def merge_items(*groups):
     combined = []
     seen = set()
 
-    for item in ptt_items + dcard_items:
-        key = item.get("url") or item.get("title")
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        combined.append(item)
+    for group in groups:
+        for item in group:
+            key = item.get("url") or item.get("title")
+            if not key or key in seen:
+                continue
+
+            seen.add(key)
+            combined.append(item)
 
     return combined[:MAX_ITEMS]
 
 
 def analyze_with_gemini(items):
     api_key = os.getenv("GEMINI_API_KEY")
+
     if not api_key:
         print("GEMINI_API_KEY not set; collector-only mode.")
         return []
@@ -205,9 +235,8 @@ def analyze_with_gemini(items):
         print("google-genai is not installed; skipping Gemini.")
         return []
 
-    # Keep the prompt bounded so daily runs remain inexpensive.
     source_text = "\n".join(
-        f"{i+1}. [{item['source']}] {item['title']} | {item['url']}"
+        f"{i + 1}. [{item['source']}] {item['title']} | {item['url']}"
         for i, item in enumerate(items[:MAX_ITEMS])
     )
 
@@ -218,19 +247,20 @@ def analyze_with_gemini(items):
 不要自行補充新聞、股價或外部資料。
 同一股票可以合併多篇討論。
 
-對每個股票/ETF輸出：
+每個股票/ETF輸出：
 - ticker：台股通常是 4~6 位數字；美股/ETF 使用明確出現的英文字母代號
 - name：能從標題可靠判斷才填名稱，否則留空
-- bullish / neutral / bearish：三個數字，總和必須是 100
-- summary：用繁體中文簡短總結討論焦點，不要給買賣建議
+- bullish / neutral / bearish：三個整數，總和必須等於 100
+- summary：繁體中文簡短總結討論焦點，不要給買賣建議
 - discussion_count：相關討論篇數
 - sources：實際相關文章 URL，最多 5 條
 
 重要：
 1. 不要把一般英文單字當 ticker。
 2. 不要猜不存在於標題中的股票。
-3. 如果只有新聞標題，也只整理標題表達的市場討論，不要聲稱已驗證新聞真偽。
-4. 沒有足夠資料的股票不要輸出。
+3. 不要加入外部新聞、股價或你自己的投資判斷。
+4. 如果資料不足，該股票不要輸出。
+5. summary 是描述社群討論內容，不是投資建議。
 
 資料：
 {source_text}
@@ -257,8 +287,14 @@ def analyze_with_gemini(items):
                         },
                     },
                     "required": [
-                        "ticker", "name", "bullish", "neutral", "bearish",
-                        "summary", "discussion_count", "sources"
+                        "ticker",
+                        "name",
+                        "bullish",
+                        "neutral",
+                        "bearish",
+                        "summary",
+                        "discussion_count",
+                        "sources",
                     ],
                 },
             }
@@ -268,8 +304,9 @@ def analyze_with_gemini(items):
 
     try:
         client = genai.Client(api_key=api_key)
+
         response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
+            model="gemini-3.5-flash-lite",
             contents=prompt,
             config=types.GenerateContentConfig(
                 temperature=0.1,
@@ -282,8 +319,9 @@ def analyze_with_gemini(items):
         stocks = payload.get("stocks", [])
         print(f"Gemini analyzed {len(stocks)} stocks.")
         return stocks
-    except Exception as e:
-        print(f"Gemini analysis failed: {e}")
+
+    except Exception as exc:
+        print(f"Gemini analysis failed: {exc}")
         return []
 
 
@@ -297,27 +335,29 @@ def main():
     print(f"Dcard: {len(dcard_items)} items ({dcard_mode})")
 
     items = merge_items(ptt_items, dcard_items)
-    stocks = analyze_with_gemini(items)
 
-    old = load_existing()
-
-    # Critical safety rule:
-    # never overwrite a previously useful dataset with an empty result
-    # when both upstream sources failed.
+    # If neither source is usable, preserve the previous useful dataset.
     if not items:
+        old = load_existing()
         old["generated_at"] = datetime.now(timezone.utc).isoformat()
         old["status"] = "sources_unavailable"
         old["sources"] = {
             "PTT": {"status": ptt_mode, "items": 0},
             "Dcard": {"status": dcard_mode, "items": 0},
         }
-        old["error"] = "PTT and Dcard returned no usable items; previous data preserved."
+        old["error"] = (
+            "PTT and Dcard returned no usable items; previous data preserved."
+        )
+
         DATA_FILE.write_text(
             json.dumps(old, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
+
         print("No new items. Previous data preserved.")
         return
+
+    stocks = analyze_with_gemini(items)
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -335,6 +375,7 @@ def main():
         json.dumps(output, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+
     print(f"Wrote data.json items={len(items)} stocks={len(stocks)}")
 
 
